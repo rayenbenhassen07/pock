@@ -1,6 +1,5 @@
 "use client";
 import useNavbar from "@/hooks/store/useNavbar";
-import { SafeUser } from "@/types";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,11 +10,18 @@ import { FiMenu } from "react-icons/fi";
 import { MenuItem } from "./MenuItem";
 import { useRouter } from "next/navigation";
 
-interface navbarProps {
-  currentUser?: SafeUser | null;
+interface User {
+  id: string;
+  username?: string;
+  email: string;
+  password: string;
 }
 
-const Navbar: React.FC<navbarProps> = ({ currentUser }) => {
+interface NavbarProps {
+  currentUser: User | undefined | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ currentUser }) => {
   const storeNavbar: any = useNavbar();
 
   const router = useRouter();
